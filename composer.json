@@ -1,0 +1,19 @@
+{
+    "description": "Asset exporter for Neos CMS",
+    "type": "neos-package",
+    "name": "punktde/assetexport",
+    "license": "MIT",
+    "require": {
+        "neos/flow": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "PunktDe\\AssetExport\\": "Classes"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "PunktDe.AssetExport"
+        }
+    }
+}
