@@ -10,8 +10,7 @@ namespace PunktDe\AssetExport\Command;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Cli\CommandController;
-use Neos\Flow\ResourceManagement\ResourceManager;
-use Neos\Flow\ResourceManagement\Storage\StorageObject;
+use Neos\Flow\Cli\Exception\StopCommandException;
 use Neos\Media\Domain\Model\Asset;
 use Neos\Media\Domain\Repository\AssetRepository;
 use Neos\Utility\Exception\FilesException;
@@ -22,20 +21,22 @@ class AssetCommandController extends CommandController
 
     /**
      * @Flow\Inject
-     * @var AssetRepository
      */
-    protected $assetRepository;
+    protected AssetRepository $assetRepository;
 
     /**
+     * Takes care of exporting all assets stored in Neos as files. This can be very helpful for backups.
+     *
      * @param string $targetPath The path where the resource files should be exported to.
      * @param bool $emptyTargetPath If set, all files in the target path will be deleted before the export runs
      * @throws FilesException
+     * @throws StopCommandException
      */
     public function exportCommand(string $targetPath, bool $emptyTargetPath = false): void
     {
         if (!is_dir($targetPath)) {
             $this->outputLine('The target path does not exist.');
-            exit(1);
+            $this->quit(1);
         }
 
         $targetPath = realpath($targetPath) . '/';

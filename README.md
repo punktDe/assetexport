@@ -4,8 +4,12 @@ This package takes care of exporting all assets stored in Neos CMS as files. Thi
 
 ## Installation
 
-    $ composer require punktde/assetexport
+```bash
+composer require punktde/assetexport
+```
 
 ## Usage
 
-    $ ./flow asset:export my/export/path
+```bash
+./flow asset:export my/export/path
+```
